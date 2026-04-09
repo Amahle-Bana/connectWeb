@@ -11,10 +11,6 @@ import { CheckCircle2, XCircle, Eye, EyeOff } from "lucide-react"
 import { useAuth } from "@/context/auth-context"
 import { useTheme } from "next-themes";
 
-
-// import AppleLogin from 'react-apple-login';
-
-
 // Login Form
 export function LoginForm({
     className,

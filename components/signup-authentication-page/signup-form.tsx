@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils"
+import { cn, isAllowedConnectWebAuthEmail } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -143,9 +143,9 @@ export function SignUpForm({
             return;
         }
 
-        // @ Email Validation
-        if (!trimmedEmail.includes('@gmail.com')) {
-            setErrorMessage('Please enter a valid email address');
+        // UFH student email (@ufh.ac.za) or authorized address
+        if (!isAllowedConnectWebAuthEmail(trimmedEmail)) {
+            setErrorMessage('Please use your UFH student email (ending in @ufh.ac.za)');
             setIsLoading(false);
             return;
         }
@@ -154,7 +154,7 @@ export function SignUpForm({
         if (trimmedEmail.length < 4) {
             setErrorMessage('Email must be at least 4 characters long');
             setIsLoading(true);
-            if (trimmedEmail.includes('@gmail.com')) {
+            if (isAllowedConnectWebAuthEmail(trimmedEmail)) {
                 setIsEmailValid(true);
                 setIsLoading(false);
             } else {
@@ -307,7 +307,7 @@ export function SignUpForm({
             setIsEmailValid(null);
             return;
         }
-        setIsEmailValid(email.includes('@gmail.com'));
+        setIsEmailValid(isAllowedConnectWebAuthEmail(email));
     }, [email]);
 
 

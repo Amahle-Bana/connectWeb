@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../connectDashboard/connectDashboard"
+		},
+		{
+			"path": "../../connectBackend/connectBackend"
+		}
+	],
+	"settings": {}
+}

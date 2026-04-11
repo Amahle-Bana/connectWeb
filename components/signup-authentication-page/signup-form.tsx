@@ -40,7 +40,7 @@ export function SignUpForm({
     const router = useRouter();
 
     // Auth Context
-    const { signup, checkExistingUserData } = useAuth();
+    const { signup, checkExistingUserData, refreshUserData } = useAuth();
 
     // Theme support
     const { theme, resolvedTheme } = useTheme();
@@ -204,10 +204,12 @@ export function SignUpForm({
                 // If no existing data found, proceed with signup
                 return signup(lowercaseUsername, trimmedEmail, trimmedPassword, trimmedFullName, structure);
             })
-            .then(result => {
+            .then(async (result) => {
                 if (result && result.success) {
-                    // Redirect to OTP verification page with email parameter
-                    router.push(`/authentication/otp?email=${encodeURIComponent(trimmedEmail)}`);
+                    // OTP flow (disabled — see OTP_IMPLEMENTATION_RESTORE.md)
+                    // router.push(`/authentication/otp?email=${encodeURIComponent(trimmedEmail)}`);
+                    await refreshUserData();
+                    router.push('/home');
                 } else if (result) {
                     setErrorMessage(result.message);
                 }

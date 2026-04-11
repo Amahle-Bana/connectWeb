@@ -29,7 +29,7 @@ export function LoginForm({
     const router = useRouter();
 
     // Login Function
-    const { login } = useAuth();
+    const { login, refreshUserData } = useAuth();
 
     const { theme, resolvedTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
@@ -92,13 +92,15 @@ export function LoginForm({
 
         // Login Function (From Auth Provider)
         login(trimmedEmail, trimmedPassword)
-            .then(result => {
-                if (result.success && result.otpRequired) {
-                    // Redirect to OTP verification page with email parameter
-                    const targetEmail = result.email || trimmedEmail;
-                    router.push(`/authentication/otp?email=${encodeURIComponent(targetEmail)}&mode=login`);
-                } else if (result.success) {
-                    // Fallback: in case backend ever returns a direct success without OTP
+            .then(async (result) => {
+                // OTP redirect (disabled — see OTP_IMPLEMENTATION_RESTORE.md)
+                // if (result.success && result.otpRequired) {
+                //     const targetEmail = result.email || trimmedEmail;
+                //     router.push(`/authentication/otp?email=${encodeURIComponent(targetEmail)}&mode=login`);
+                //     return;
+                // }
+                if (result.success) {
+                    await refreshUserData();
                     router.push('/home');
                 } else {
                     setErrorMessage(result.message);

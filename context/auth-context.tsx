@@ -159,18 +159,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                     };
                 }
 
-                if (content.otp_required) {
-                    // Credentials are correct and OTP has been sent.
-                    // Do NOT mark the user as authenticated yet.
+                if (content.jwt) {
+                    localStorage.setItem('jwt_token', content.jwt);
                     return {
                         success: true,
-                        message: content.message || 'OTP sent to your email. Please verify to continue.',
-                        otpRequired: true,
-                        email: content.email || trimmedEmail,
+                        message: content.message || 'Login successful.',
+                        otpRequired: false,
                     };
                 }
 
-                // Fallback: unexpected successful response without otp_required
+                // OTP path (disabled) — restore when re-enabling backend OTP login
+                // if (content.otp_required) {
+                //     return {
+                //         success: true,
+                //         message: content.message || 'OTP sent to your email. Please verify to continue.',
+                //         otpRequired: true,
+                //         email: content.email || trimmedEmail,
+                //     };
+                // }
+
                 return {
                     success: false,
                     message: content.error || 'Unexpected login response. Please try again.',
@@ -256,10 +263,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                     };
                 }
 
-                // Backend returns message, user_id, and email when user is created and OTP is sent.
+                if (content.jwt) {
+                    localStorage.setItem('jwt_token', content.jwt);
+                }
+
                 return {
                     success: true,
-                    message: content.message || 'User created successfully. OTP sent to email.',
+                    message: content.message || 'User created successfully.',
                     email: content.email || email,
                 };
             })
@@ -272,7 +282,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             });
     };
 
-    // Verify OTP Function
+    // Verify OTP Function (disabled — endpoint returns 501; kept for restoration)
     const verifyOTP = (email: string, otpCode: string) => {
         const baseUrl = process.env.NEXT_PUBLIC_VERIFY_OTP || 'http://localhost:8000';
         return fetch(`${baseUrl}/somaapp/verify-otp/`, {
@@ -311,7 +321,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             });
     };
 
-    // Resend OTP Function
+    // Resend OTP Function (disabled — resend branch returns 400; kept for restoration)
     const resendOTP = (email: string) => {
         const baseUrl = process.env.NEXT_PUBLIC_RESEND_OTP || 'http://localhost:8000';
         return fetch(`${baseUrl}/somaapp/signup/`, {

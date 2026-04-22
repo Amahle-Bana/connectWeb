@@ -32,8 +32,7 @@ import useWindowSize from '@/hooks/useWindow';
 import { UserSidebar } from '@/components/HomePage/userSidebar';
 import { motion } from 'motion/react';
 import { useAppSelector } from "@/redux/hooks";
-
-
+import { API_BASE_URL } from '@/lib/api-config';
 
 const searchCategories = [
     "All",
@@ -77,9 +76,6 @@ const DummyContent = () => {
         </>
     );
 };
-
-
-const API_BASE_URL = 'http://localhost:8000';
 
 // Interface for User data from backend
 interface User {

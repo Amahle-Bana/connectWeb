@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { Image, Upload } from 'lucide-react';
 import { useAppSelector } from '@/redux/hooks';
+import { API_BASE_URL } from '@/lib/api-config';
 
 export default function ImportEmailListPage() {
     const router = useRouter();
@@ -88,7 +89,7 @@ export default function ImportEmailListPage() {
             const formData = new FormData();
             formData.append('csv_file', uploadedFiles[0]);
             formData.append("publication_id", String(publicationId));
-            const response = await fetch("http://localhost:8000/somaapp/upload-publication-csv/", {
+            const response = await fetch(`${API_BASE_URL}/somaapp/upload-publication-csv/`, {
                 method: "POST",
                 headers: {
                     'Authorization': `Bearer ${jwtToken}`,

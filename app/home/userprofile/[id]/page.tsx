@@ -32,8 +32,7 @@ import { toast } from 'sonner';
 import { Toaster } from '@/components/ui/sonner';
 import { NotificationsDialog } from '@/components/PodcastsPage/notificationsDialog';
 import { SearchQueryDialog } from '@/components/PodcastsPage/searchQueryDialog';
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:8000';
+import { API_BASE_URL } from '@/lib/api-config';
 
 const searchCategories = ['All', 'Polical Parties', 'Leaders'];
 const notificationCategories = ['All'];

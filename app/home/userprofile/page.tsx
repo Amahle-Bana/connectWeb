@@ -39,6 +39,7 @@ import {
 } from '@/components/ui/drawer';
 import { toast } from 'sonner';
 import { Toaster } from '@/components/ui/sonner';
+import { API_BASE_URL } from '@/lib/api-config';
 
 const categories = [
     'All',
@@ -71,8 +72,6 @@ const searchCategories = [
 const notificationCategories = [
     "All"
 ];
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:8000';
 
 interface User {
     id: number;

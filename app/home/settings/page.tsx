@@ -22,6 +22,7 @@ import { SearchQueryDialog } from "@/components/profile-page/searchQueryDialog";
 import { NotificationsDialog } from "@/components/profile-page/notificationsDialog";
 import { Toggle } from "@/components/ui/toggle";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { API_BASE_URL } from "@/lib/api-config";
 
 
 // Categories
@@ -197,7 +198,7 @@ export default function SettingsPage() {
         };
 
         // Make API call to save to database
-        fetch(`http://localhost:8000/somaapp/update-notification-settings/`, {
+        fetch(`${API_BASE_URL}/somaapp/update-notification-settings/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -280,7 +281,7 @@ export default function SettingsPage() {
         };
 
         // Make API call to save to database
-        fetch(`http://localhost:8000/somaapp/update-content-preferences/`, {
+        fetch(`${API_BASE_URL}/somaapp/update-content-preferences/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -345,7 +346,7 @@ export default function SettingsPage() {
         };
 
         // Make API call to save to database
-        fetch(`http://localhost:8000/somaapp/update-privacy-settings/`, {
+        fetch(`${API_BASE_URL}/somaapp/update-privacy-settings/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

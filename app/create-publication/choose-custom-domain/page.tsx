@@ -12,6 +12,7 @@ import { ClipLoader } from "react-spinners";
 import { cn } from "@/lib/utils"
 import { createPublication } from '@/redux/create-publication-store/createPublicationSlice';
 import { IconWorld } from '@tabler/icons-react'
+import { API_BASE_URL } from '@/lib/api-config';
 
 export default function CreatePublicationsPage() {
     const router = useRouter();
@@ -57,7 +58,7 @@ export default function CreatePublicationsPage() {
         setIsCheckingUsername(true);
 
         try {
-            const response = await fetch("http://localhost:8000/somaapp/check-publication-domain-availability/", {
+            const response = await fetch(`${API_BASE_URL}/somaapp/check-publication-domain-availability/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

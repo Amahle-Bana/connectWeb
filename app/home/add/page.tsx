@@ -27,6 +27,7 @@ import { IconBrandFacebook, IconBrandInstagram, IconBrandLinkedin, IconBrandThre
 import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectValue, SelectTrigger } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
+import { API_BASE_URL } from '@/lib/api-config';
 
 interface PartyListItem {
     id: number;
@@ -145,7 +146,7 @@ export default function AddPage() {
             // Get JWT token from localStorage as fallback like the auth context does
             const jwtToken = localStorage.getItem('jwt_token');
 
-            const response = await fetch('http://localhost:8000/somaapp/user/', {
+            const response = await fetch(`${API_BASE_URL}/somaapp/user/`, {
                 method: 'GET',
                 credentials: 'include',
                 headers: jwtToken ? {
@@ -167,7 +168,7 @@ export default function AddPage() {
             setLoadingParties(true);
             const jwtToken = localStorage.getItem('jwt_token');
 
-            const response = await fetch('http://localhost:8000/somaapp/get-all-parties/', {
+            const response = await fetch(`${API_BASE_URL}/somaapp/get-all-parties/`, {
                 method: 'GET',
                 credentials: 'include',
                 headers: jwtToken ? {
@@ -347,7 +348,7 @@ export default function AddPage() {
                 const jwtToken = localStorage.getItem('jwt_token');
 
                 // Make API call to create post
-                const response = await fetch('http://localhost:8000/somaapp/create-post/', {
+                const response = await fetch(`${API_BASE_URL}/somaapp/create-post/`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

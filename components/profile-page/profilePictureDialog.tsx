@@ -7,6 +7,7 @@ import { Input } from '../ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 import { useAppDispatch } from '@/redux/hooks';
 import { updateUserField } from '@/redux/user-store/userSlice';
+import { API_BASE_URL } from '@/lib/api-config';
 
 interface ArticleImageDialogProps {
     open: boolean;
@@ -59,7 +60,7 @@ const ArticleImageDialog = ({ open, onOpenChange, setImagePreview }: ArticleImag
                 try {
                     // Send to backend API
                     const jwtToken = localStorage.getItem('jwt_token');
-                    const response = await fetch('http://localhost:8000/somaapp/update-profile-picture/', {
+                    const response = await fetch(`${API_BASE_URL}/somaapp/update-profile-picture/`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

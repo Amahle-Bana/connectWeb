@@ -40,9 +40,7 @@ import { useRouter } from "next/navigation";
 import { UserSidebar } from "@/components/HomePage/userSidebar";
 import { InstagramCarousel } from "@/components/ui/instagram-carousel";
 import { useInfiniteQuery } from '@tanstack/react-query';
-
-// API base URL - adjust according to your backend setup
-const API_BASE_URL = 'http://localhost:8000';
+import { API_BASE_URL } from '@/lib/api-config';
 
 // Interface for User data from backend
 interface User {

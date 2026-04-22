@@ -42,9 +42,7 @@ import {
     DrawerTitle,
 } from "@/components/ui/drawer";
 import { useInfiniteQuery } from '@tanstack/react-query';
-
-// API base URL - adjust according to your backend setup
-const API_BASE_URL = 'http://localhost:8000';
+import { API_BASE_URL } from '@/lib/api-config';
 
 // Interface for Party data from backend
 interface Party {

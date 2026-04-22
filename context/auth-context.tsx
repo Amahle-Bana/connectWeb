@@ -2,6 +2,7 @@
 
 // Imports
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { API_BASE_URL } from '@/lib/api-config';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { setUser } from '../redux/user-store/userSlice';
 
@@ -60,7 +61,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const jwtToken = localStorage.getItem('jwt_token');
 
         // Fetching Current User
-        fetch(`${process.env.NEXT_PUBLIC_CHECK_AUTH_STATUS || 'http://localhost:8000/somaapp/user/'}`, {
+        fetch(`${process.env.NEXT_PUBLIC_CHECK_AUTH_STATUS || `${API_BASE_URL}/somaapp/user/`}`, {
             credentials: 'include',
             headers: jwtToken ? {
                 'Authorization': `Bearer ${jwtToken}`
@@ -141,7 +142,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const login = (email: string, password: string) => {
         const trimmedEmail = email.trim();
         const trimmedPassword = password.trim();
-        return fetch(`${process.env.NEXT_PUBLIC_LOGIN || 'http://localhost:8000/somaapp/login/'}`, {
+        return fetch(`${process.env.NEXT_PUBLIC_LOGIN || `${API_BASE_URL}/somaapp/login/`}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -195,7 +196,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     // Check Existing User Data Function
     const checkExistingUserData = (username: string, email: string) => {
-        return fetch(`${process.env.NEXT_PUBLIC_CHECK_EXISTING_USER || 'http://localhost:8000/somaapp/check-existing-user/'}`, {
+        return fetch(`${process.env.NEXT_PUBLIC_CHECK_EXISTING_USER || `${API_BASE_URL}/somaapp/check-existing-user/`}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -246,7 +247,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             signupData.structure = structure;
         }
         
-        return fetch(`${process.env.NEXT_PUBLIC_SIGNUP || 'http://localhost:8000/somaapp/signup/'}`, {
+        return fetch(`${process.env.NEXT_PUBLIC_SIGNUP || `${API_BASE_URL}/somaapp/signup/`}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -284,7 +285,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     // Verify OTP Function (disabled — endpoint returns 501; kept for restoration)
     const verifyOTP = (email: string, otpCode: string) => {
-        const baseUrl = process.env.NEXT_PUBLIC_VERIFY_OTP || 'http://localhost:8000';
+        const baseUrl = process.env.NEXT_PUBLIC_VERIFY_OTP || API_BASE_URL;
         return fetch(`${baseUrl}/somaapp/verify-otp/`, {
             method: 'POST',
             headers: {
@@ -323,7 +324,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     // Resend OTP Function (disabled — resend branch returns 400; kept for restoration)
     const resendOTP = (email: string) => {
-        const baseUrl = process.env.NEXT_PUBLIC_RESEND_OTP || 'http://localhost:8000';
+        const baseUrl = process.env.NEXT_PUBLIC_RESEND_OTP || API_BASE_URL;
         return fetch(`${baseUrl}/somaapp/signup/`, {
             method: 'POST',
             headers: {
@@ -374,7 +375,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // Logout Function
     const logout = async () => {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_LOGOUT || 'http://localhost:8000/somaapp/logout/'}`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_LOGOUT || `${API_BASE_URL}/somaapp/logout/`}`, {
                 method: 'POST',
                 credentials: 'include',
             });

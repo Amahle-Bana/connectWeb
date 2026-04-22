@@ -11,6 +11,7 @@ import { AtSign, CheckCircle2, XCircle } from "lucide-react";
 import { ClipLoader } from "react-spinners";
 import { cn } from "@/lib/utils"
 import { createPublication } from '@/redux/create-publication-store/createPublicationSlice';
+import { API_BASE_URL } from '@/lib/api-config';
 
 const USERNAME_REGEX = /^[a-z0-9_]+$/;
 
@@ -73,7 +74,7 @@ export default function CreatePublicationsPage() {
 
         // Check Username Availability
         try {
-            const response = await fetch("http://localhost:8000/somaapp/check-publication-username/", {
+            const response = await fetch(`${API_BASE_URL}/somaapp/check-publication-username/`, {
                 // POST Request
                 method: 'POST',
                 // JSON Request Type
@@ -111,7 +112,7 @@ export default function CreatePublicationsPage() {
         console.log("-----JWTToken: ", jwtToken);
 
         try {
-            const response = await fetch("http://localhost:8000/somaapp/publications/", {
+            const response = await fetch(`${API_BASE_URL}/somaapp/publications/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

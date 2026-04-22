@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ClipLoader } from 'react-spinners';
 import { updateUserField } from '@/redux/user-store/userSlice';
 import { RootState } from '@/redux'; // adjust import as needed
+import { API_BASE_URL } from '@/lib/api-config';
 
 
 interface PublicationApiRow {
@@ -65,7 +66,7 @@ export default function PublicationsCategoryPage() {
 
         try {
             const jwtToken = localStorage.getItem('jwt_token');
-            const response = await fetch('http://localhost:8000/somaapp/update-publication-category/', {
+            const response = await fetch(`${API_BASE_URL}/somaapp/update-publication-category/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -98,7 +99,7 @@ export default function PublicationsCategoryPage() {
         if (!publicationId) return;
         try {
             const jwtToken = localStorage.getItem('jwt_token');
-            const response = await fetch("http://localhost:8000/somaapp/publications/", {
+            const response = await fetch(`${API_BASE_URL}/somaapp/publications/`, {
                 method: "GET",
                 headers: {
                     'Authorization': `Bearer ${jwtToken}`,
@@ -136,7 +137,7 @@ export default function PublicationsCategoryPage() {
             if (!publicationId) return;
             try {
                 const jwtToken = localStorage.getItem('jwt_token');
-                const response = await fetch("http://localhost:8000/somaapp/publications/", {
+                const response = await fetch(`${API_BASE_URL}/somaapp/publications/`, {
                     method: "GET",
                     headers: {
                         'Authorization': `Bearer ${jwtToken}`,

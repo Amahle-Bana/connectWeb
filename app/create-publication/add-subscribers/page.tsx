@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Image, Upload } from 'lucide-react';
 import { useAppSelector } from '@/redux/hooks';
+import { API_BASE_URL } from '@/lib/api-config';
 
 export default function AddSubscribersPage() {
     const router = useRouter();
@@ -66,7 +67,7 @@ export default function AddSubscribersPage() {
             const jwtToken = localStorage.getItem('jwt_token');
             for (const sub of subscribers) {
                 if (sub.email && sub.fullName && sub.phoneNumber) {
-                    const response = await fetch('http://localhost:8000/somaapp/add-subscriber-to-csv/', {
+                    const response = await fetch(`${API_BASE_URL}/somaapp/add-subscriber-to-csv/`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
